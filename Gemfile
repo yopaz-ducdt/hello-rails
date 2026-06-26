@@ -18,7 +18,7 @@ gem "solid_queue"
 gem "solid_cable"
 gem "bootsnap", require: false
 gem "thruster", require: false
-gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 2.0"
 
 # Băm mật khẩu (Bỏ dấu thăng # để bật sẵn cho các chương sau khi làm tính năng Đăng nhập)
 gem "bcrypt", "~> 3.1.7"
