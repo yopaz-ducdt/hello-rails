@@ -1,0 +1,20 @@
+databases:
+  - name: hello_app_db
+    databaseName: hello_app
+    user: hello_app_user
+    plan: free # Sử dụng gói Postgres miễn phí của Render
+
+services:
+  - type: web
+    name: rails-hello-app-r8 # Tên ứng dụng của bạn (có thể đổi tùy ý)
+    env: ruby
+    plan: free # Sử dụng gói Web miễn phí của Render
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec rails server" # Lệnh khởi chạy server Rails 8 tiêu chuẩn
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hello_app_db
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false # Chúng ta sẽ nhập thủ công khóa này trên giao diện Render để bảo mật
