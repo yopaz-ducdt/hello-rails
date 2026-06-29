@@ -1,0 +1,16 @@
+<% provide(:title, "Home | Ruby on Rails")%>
+<main class="max-w-6xl mx-auto px-4">
+  <div class="flex justify-center text-center">
+    <h1 class="text-4xl font-bold mt-20">Hello World!</h1>
+  </div>
+  <h2 class="text-xl text-orange-500">route.rb:</h2>
+  <p>
+    get "static_pages/home"<br/>
+    get "static_pages/help"<br/>
+    get "static_pages/about"<br/>
+    resources :microposts<br/>
+    resources :users<br/>
+    get "up" => "rails/health#show", as: :rails_health_check<br/>
+    root "static_pages#home"
+  </p>
+</main>
