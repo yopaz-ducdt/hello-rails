@@ -1,16 +1,12 @@
-<% provide(:title, "Home")%>
-<main class="max-w-6xl mx-auto px-4">
-  <div class="flex justify-center text-center">
-    <h1 class="text-4xl font-bold mt-20">Hello World!</h1>
-  </div>
-  <h2 class="text-xl text-orange-500">route.rb:</h2>
-  <p>
-    get "static_pages/home"<br/>
-    get "static_pages/help"<br/>
-    get "static_pages/about"<br/>
-    resources :microposts<br/>
-    resources :users<br/>
-    get "up" => "rails/health#show", as: :rails_health_check<br/>
-    root "static_pages#home"
-  </p>
-</main>
+<% provide(:title, "Home") %>
+<div class="text-center bg-gray-100 py-16 px-8 rounded-2xl shadow-sm my-4">
+  <h1 class="text-5xl font-extrabold tracking-tight text-gray-900 mb-4">
+    Welcome to the Sample App
+  </h1>
+  <h2 class="text-xl font-normal text-gray-500 max-w-2xl mx-auto mb-8 leading-relaxed">
+    This is the home page for the 
+    <a href="https://www.railstutorial.org/" class="text-blue-600 hover:underline font-medium">Ruby on Rails Tutorial</a>
+    sample application.
+  </h2>
+  <%= link_to "Sign up now!", signup_path, class: "inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition duration-200 no-underline" %>
+</div>

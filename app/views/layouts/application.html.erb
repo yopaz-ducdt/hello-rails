@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= full_title(yield(:title)) %></title>
+    <title><%= content_for(:title) %> | Ruby on Rails</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Hello Rails">
-    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= yield :head %>
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
-  <body>
-    <%= yield %>
+  <body class="bg-gray-50 text-gray-900 font-sans antialiased min-h-screen flex flex-col">
+    <header class="bg-slate-900 text-white shadow-md">
+      <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+        <%= link_to "sample app", root_path, id: "logo", class: "text-xl font-bold tracking-tight uppercase hover:text-gray-300 no-underline"%>
+        <nav>
+          <ul class="flex space-x-6 list-none m-0 p-0">
+            <li><%= link_to "Home", root_path, class: "text-slate-300 hover:text-white no-underline font-medium"%></li>
+            <li><%= link_to "Help", help_path, class: "text-slate-300 hover:text-white no-underline font-medium" %></li>
+            <li><%= link_to "Log in", "#", class: "text-slate-300 hover:text-white no-underline font-medium" %></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full">
+      <%= yield %>
+      <footer class="fixed bottom-0 py-6 border-t border-gray-200 text-gray-500 text-sm flex justify-between items-center w-full">
+        <small class="block">
+          The <a href="https://www.railstutorial.org/" class="text-gray-600 hover:text-gray-900 no-underline font-medium">Ruby on Rails Tutorial</a>
+          by <a href="https://www.michaelhartl.com/" class="text-gray-600 hover:text-gray-900 no-underline font-medium">Michael Hartl</a>
+        </small>
+        <nav>
+          <ul class="flex space-x-4 list-none m-0 p-0">
+            <li><%= link_to "About", about_path, class: "text-gray-600 hover:text-gray-900 no-underline" %></li>
+            <li><%= link_to "Contact", contact_path, class: "text-gray-600 hover:text-gray-900 no-underline" %></li>
+          </ul>
+        </nav>
+      </footer>
+    </main>
   </body>
 </html>

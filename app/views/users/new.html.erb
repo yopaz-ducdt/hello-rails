@@ -1,11 +1,7 @@
-<% content_for :title, "New user" %>
-
-<h1>New user</h1>
-
-<%= render "form", user: @user %>
-
-<br>
-
-<div>
-  <%= link_to "Back to users", users_path %>
+<% provide(:title, "Sign up") %>
+<div class="text-center py-12">
+  <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Sign up</h1>
+  <p class="text-lg text-gray-500">
+    Đây là trang đăng ký thành viên mới (Sẽ hoàn thiện ở Chương 7).
+  </p>
 </div>
