@@ -22,7 +22,17 @@
       </div>
     </header>
     <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full">
+      <% flash.each do |message_type, message| %>
+        <div class="mb-6 p-4 rounded-xl border font-medium text-sm text-green-800 bg-green-50 border-green-200">
+          <%= message %>
+        </div>
+      <% end %>
       <%= yield %>
+      <% if Rails.env.development? %>
+        <div class="mt-12 p-4 bg-gray-100 border border-gray-200 rounded-lg text-xs font-mono text-gray-700 overflow-auto clear-both">
+          <%= debug(params) %>
+        </div>
+      <% end %>
       <footer class="fixed bottom-0 py-6 border-t border-gray-200 text-gray-500 text-sm flex justify-between items-center w-full">
         <small class="block">
           The <a href="https://www.railstutorial.org/" class="text-gray-600 hover:text-gray-900 no-underline font-medium">Ruby on Rails Tutorial</a>
