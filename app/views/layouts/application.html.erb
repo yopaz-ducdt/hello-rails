@@ -10,41 +10,66 @@
   </head>
   <body class="bg-gray-50 text-gray-900 font-sans antialiased min-h-screen flex flex-col">
     <header class="bg-slate-900 text-white shadow-md">
-      <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
-        <%= link_to "sample app", root_path, id: "logo", class: "text-xl font-bold tracking-tight uppercase hover:text-gray-300 no-underline"%>
-        <nav>
-          <ul class="flex space-x-6 list-none m-0 p-0">
-            <li><%= link_to "Home", root_path, class: "text-slate-300 hover:text-white no-underline font-medium"%></li>
-            <li><%= link_to "Help", help_path, class: "text-slate-300 hover:text-white no-underline font-medium" %></li>
-            <li><%= link_to "Log in", "#", class: "text-slate-300 hover:text-white no-underline font-medium" %></li>
-          </ul>
-        </nav>
-      </div>
+      <header class="bg-slate-900 text-white shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+          <%= link_to "sample app", root_path, id: "logo", class: "text-xl font-black tracking-wider uppercase hover:text-gray-300 transition" %>
+          <nav>
+            <ul class="flex items-center space-x-6 text-sm font-semibold text-gray-300">
+              <li><%= link_to "Home", root_path, class: "hover:text-white transition" %></li>
+              <li><%= link_to "Help", help_path, class: "hover:text-white transition" %></li>
+              <% if logged_in? %>
+                <li><%= link_to "Users", "#", class: "hover:text-white transition" %></li>
+                <div class="relative group">
+                  <button class="flex items-center space-x-1 hover:text-white focus:outline-none transition cursor-pointer">
+                    <span>Account</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                  </button>
+                  <div class="absolute right-0 w-48 bg-white text-gray-800 rounded-xl shadow-lg py-2 border border-gray-100 hidden group-hover:block z-50">
+                    <%= link_to "Profile", current_user, class: "block px-4 py-2 hover:bg-gray-50 transition" %>
+                    <%= link_to "Settings", "#", class: "block px-4 py-2 hover:bg-gray-50 transition" %>
+                    <div class="border-t border-gray-100 my-1"></div>
+                    <%= link_to "Log out", logout_path, data: { "turbo-method": :delete }, class: "block px-4 py-2 text-red-600 hover:bg-red-50 transition" %>
+                  </div>
+                </div>
+              <% else %>
+                <li><%= link_to "Log in", login_path, class: "hover:text-white transition bg-blue-600 px-4 py-2 rounded-lg text-white font-medium shadow-sm hover:bg-blue-700" %></li>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+      </header>
     </header>
     <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full">
-      <% flash.each do |message_type, message| %>
-        <div class="mb-6 p-4 rounded-xl border font-medium text-sm text-green-800 bg-green-50 border-green-200">
-          <%= message %>
-        </div>
-      <% end %>
-      <%= yield %>
-      <% if Rails.env.development? %>
-        <div class="mt-12 p-4 bg-gray-100 border border-gray-200 rounded-lg text-xs font-mono text-gray-700 overflow-auto clear-both">
-          <%= debug(params) %>
-        </div>
-      <% end %>
-      <footer class="fixed bottom-0 py-6 border-t border-gray-200 text-gray-500 text-sm flex justify-between items-center w-full">
-        <small class="block">
-          The <a href="https://www.railstutorial.org/" class="text-gray-600 hover:text-gray-900 no-underline font-medium">Ruby on Rails Tutorial</a>
-          by <a href="https://www.michaelhartl.com/" class="text-gray-600 hover:text-gray-900 no-underline font-medium">Michael Hartl</a>
-        </small>
-        <nav>
-          <ul class="flex space-x-4 list-none m-0 p-0">
-            <li><%= link_to "About", about_path, class: "text-gray-600 hover:text-gray-900 no-underline" %></li>
-            <li><%= link_to "Contact", contact_path, class: "text-gray-600 hover:text-gray-900 no-underline" %></li>
-          </ul>
-        </nav>
-      </footer>
-    </main>
-  </body>
-</html>
+      <main class="container mx-auto px-4 py-8">
+        <% flash.each do |message_type, message| %>
+          <% if message_type == "success" %>
+            <div class="mb-6 p-4 rounded-xl border font-medium text-sm text-green-800 bg-green-50 border-green-200">
+              <%= message %>
+            </div>
+          <% else %>
+            <div class="mb-6 p-4 rounded-xl border font-medium text-sm text-red-800 bg-red-50 border-red-200">
+              <%= message %>
+            </div>
+          <% end %>
+        <% end %>
+        <%= yield %>
+        <% if Rails.env.development? %>
+          <div class="mt-12 p-4 bg-gray-100 border border-gray-200 rounded-lg text-xs font-mono text-gray-700 overflow-auto clear-both">
+            <%= debug(params) %>
+          </div>
+        <% end %>
+        <footer class="fixed bottom-0 py-6 border-t border-gray-200 text-gray-500 text-sm flex justify-between items-center w-full">
+          <small class="block">
+            The <a href="https://www.railstutorial.org/" class="text-gray-600 hover:text-gray-900 no-underline font-medium">Ruby on Rails Tutorial</a>
+            by <a href="https://www.michaelhartl.com/" class="text-gray-600 hover:text-gray-900 no-underline font-medium">Michael Hartl</a>
+          </small>
+          <nav>
+            <ul class="flex space-x-4 list-none m-0 p-0">
+              <li><%= link_to "About", about_path, class: "text-gray-600 hover:text-gray-900 no-underline" %></li>
+              <li><%= link_to "Contact", contact_path, class: "text-gray-600 hover:text-gray-900 no-underline" %></li>
+            </ul>
+          </nav>
+        </footer>
+      </main>
+    </body>
+  </html>
