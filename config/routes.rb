@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "account_activations/edit"
   get "sessions/new"
   root "static_pages#home"
 
@@ -13,5 +14,5 @@ Rails.application.routes.draw do
 
   resources :microposts
   resources :users
-  resources :users
+  resources :account_activations, only: :edit
 end
