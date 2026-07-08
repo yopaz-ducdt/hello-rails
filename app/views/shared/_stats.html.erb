@@ -1,0 +1,18 @@
+<% @user ||= current_user %>
+<div class="flex items-center space-x-6 py-2 border-t border-b border-gray-100 my-4">
+  <!-- Thống kê số lượng Đang theo dõi (Following) -->
+  <!-- Thêm chữ 'do' vào cuối lệnh link_to để làm block chuẩn Rails -->
+  <%= link_to following_user_path(@user), class: "group flex items-center space-x-1 hover:text-blue-600 transition" do %>
+    <strong id="following" class="text-base font-bold text-gray-900 group-hover:text-blue-600">
+      <%= @user.following.count %>
+    </strong>
+    <span class="text-sm text-gray-500">following</span>
+  <% end %>
+  <!-- Thống kê số lượng Người theo dõi mình (Followers) -->
+  <%= link_to followers_user_path(@user), class: "group flex items-center space-x-1 hover:text-blue-600 transition" do %>
+    <strong id="followers" class="text-base font-bold text-gray-900 group-hover:text-blue-600">
+      <%= @user.followers.count %>
+    </strong>
+    <span class="text-sm text-gray-500">followers</span>
+  <% end %>
+</div>

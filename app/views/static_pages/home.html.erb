@@ -12,25 +12,24 @@
           </div>
         </div>
       </div>
-      <!-- Nhúng chiếc form đăng bài vào đây -->
+      <div class="flex justify-center">
+        <%= render 'shared/stats' %>
+      </div>
       <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
         <%= render 'shared/micropost_form' %>
       </div>
     </div>
-    <!-- CỘT PHẢI: BÀI ĐĂNG TỔNG HỢP (FEED) -->
+    <!-- CỘT PHẢI: BẢNG TIN (FEED) -->
     <div class="md:col-span-2 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-      <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
-        <span>Micropost Feed</span>
-      </h3>
-      <!-- Nhúng bảng tin thật vào đây -->
+      <h3 class="text-xl font-bold text-gray-900 mb-6">Micropost Feed</h3>
       <%= render 'shared/feed' %>
     </div>
   </div>
 <% else %>
-  <!-- Giữ nguyên phần giao diện Welcome cũ của trang chủ khi chưa đăng nhập tại đây -->
+  <!-- Giao diện Welcome khi chưa đăng nhập -->
   <div class="text-center mt-20">
     <h1 class="text-4xl font-extrabold text-gray-900">Welcome to the Sample App</h1>
     <p class="mt-4 text-gray-500">This is the home page for the Ruby on Rails Tutorial application.</p>
-    <%= link_to "Sign up now!", signup_path, class: "mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold" %>
+    <%= link_to "Sign up now!", signup_path, class: "mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition" %>
   </div>
 <% end %>

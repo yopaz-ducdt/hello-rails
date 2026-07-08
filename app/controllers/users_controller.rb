@@ -52,6 +52,20 @@ class UsersController < ApplicationController
     redirect_to users_url, status: :see_other
   end
 
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @pagy, @users = pagy(@user.following, limit: 5)
+    render "show_follow"
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @pagy, @users = pagy(@user.followers, limit: 5)
+    render "show_follow"
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
