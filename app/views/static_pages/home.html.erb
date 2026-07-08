@@ -1,12 +1,36 @@
-<% provide(:title, "Home") %>
-<div class="text-center bg-gray-100 py-16 px-8 rounded-2xl shadow-sm my-4">
-  <h1 class="text-5xl font-extrabold tracking-tight text-gray-900 mb-4">
-    Welcome to the Sample App
-  </h1>
-  <h2 class="text-xl font-normal text-gray-500 max-w-2xl mx-auto mb-8 leading-relaxed">
-    This is the home page for the 
-    <a href="https://www.railstutorial.org/" class="text-blue-600 hover:underline font-medium">Ruby on Rails Tutorial</a>
-    sample application.
-  </h2>
-  <%= link_to "Sign up now!", signup_path, class: "inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition duration-200 no-underline" %>
-</div>
+<% if logged_in? %>
+  <div class="max-w-5xl mx-auto mt-8 px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- CỘT TRÁI: SIDEBAR THÔNG TIN USER & FORM ĐĂNG BÀI -->
+    <div class="space-y-6">
+      <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center space-x-4">
+        <%= gravatar_for current_user %>
+        <div>
+          <h2 class="font-bold text-gray-900 leading-tight"><%= current_user.name %></h2>
+          <%= link_to "view my profile", current_user, class: "text-xs text-blue-600 hover:underline" %>
+          <div class="text-xs text-gray-400 mt-1">
+            <%= pluralize(current_user.microposts.count, "micropost") %>
+          </div>
+        </div>
+      </div>
+      <!-- Nhúng chiếc form đăng bài vào đây -->
+      <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
+        <%= render 'shared/micropost_form' %>
+      </div>
+    </div>
+    <!-- CỘT PHẢI: BÀI ĐĂNG TỔNG HỢP (FEED) -->
+    <div class="md:col-span-2 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+      <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center space-x-2">
+        <span>Micropost Feed</span>
+      </h3>
+      <!-- Nhúng bảng tin thật vào đây -->
+      <%= render 'shared/feed' %>
+    </div>
+  </div>
+<% else %>
+  <!-- Giữ nguyên phần giao diện Welcome cũ của trang chủ khi chưa đăng nhập tại đây -->
+  <div class="text-center mt-20">
+    <h1 class="text-4xl font-extrabold text-gray-900">Welcome to the Sample App</h1>
+    <p class="mt-4 text-gray-500">This is the home page for the Ruby on Rails Tutorial application.</p>
+    <%= link_to "Sign up now!", signup_path, class: "mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold" %>
+  </div>
+<% end %>

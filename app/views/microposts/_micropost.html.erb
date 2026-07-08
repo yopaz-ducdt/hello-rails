@@ -1,12 +1,16 @@
-<div id="<%= dom_id micropost %>">
-  <div>
-    <strong>Content:</strong>
+<li id="micropost-<%= micropost.id %>" class="py-4 border-b border-gray-100 last:border-none flex flex-col space-y-1">
+  <!-- Nội dung bài đăng -->
+  <span class="text-gray-800 text-sm leading-relaxed break-words">
     <%= micropost.content %>
-  </div>
-
-  <div>
-    <strong>User:</strong>
-    <%= micropost.user_id %>
-  </div>
-
-</div>
+  </span>
+  <!-- Thanh thông tin thời gian + Nút xóa -->
+  <span class="text-xs text-gray-400 flex items-center justify-between">
+    <span>Posted <%= time_ago_in_words(micropost.created_at) %> ago.</span>
+    <!-- Chỉ hiển thị nút xóa nếu chính chủ đang xem bài viết -->
+    <% if current_user?(micropost.user) %>
+      <%= link_to "delete", micropost, data: { "turbo-method": :delete,
+                                               "turbo-confirm": "You sure?" },
+                  class: "text-red-500 hover:text-red-700 hover:underline transition font-medium ml-2" %>
+    <% end %>
+  </span>
+</li>

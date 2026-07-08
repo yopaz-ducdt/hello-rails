@@ -1,19 +1,36 @@
 <% provide(:title, @user.name) %>
-<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto mt-6">
-  <!-- Cột Sidebar bên trái (Chiếm 1 phần) -->
-  <aside class="md:col-span-1 bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col items-center text-center h-fit">
-    <section class="user_info">
-      <div class="mb-3 flex justify-center">
-        <!-- Gọi hàm helper Gravatar vừa viết ở bước trên -->
+<div class="max-w-5xl mx-auto mt-8 px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+  <!-- CỘT TRÁI: THÔNG TIN USER (1/3 chiều rộng) -->
+  <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm h-fit">
+    <div class="flex flex-col items-center text-center">
+      <div class="mb-4">
         <%= gravatar_for @user %>
       </div>
-      <h1 class="text-xl font-bold text-gray-900 leading-tight">
-        <%= @user.name %>
-      </h1>
-    </section>
-  </aside>
-  <!-- Cột nội dung bên phải (Chiếm 3 phần - Tạm thời để trống theo đúng tiến độ sách) -->
-  <div class="md:col-span-3">
-    <!-- Sau này ở các chương sau chúng ta sẽ hiển thị danh sách bài đăng ở đây -->
+      <h1 class="text-2xl font-bold text-gray-900 tracking-tight"><%= @user.name %></h1>
+      <p class="text-sm text-gray-500 mt-1"><%= @user.email %></p>
+    </div>
+  </div>
+  <!-- CỘT PHẢI: BÀI ĐĂNG MICROPOSTS (2/3 chiều rộng) -->
+  <div class="md:col-span-2 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center space-x-2">
+      <span>Microposts</span>
+      <span class="bg-gray-100 text-gray-600 text-xs px-2.5 py-0.5 rounded-full font-semibold">
+        <%= @user.microposts.count %>
+      </span>
+    </h3>
+    <% if @user.microposts.any? %>
+      <!-- Danh sách bài viết -->
+      <ol class="divide-y divide-gray-100">
+        <%= render @microposts %>
+      </ol>
+      <!-- Thanh phân trang cho bài viết -->
+      <div class="mt-6 flex justify-center">
+        <%== pagy_nav @pagy %>
+      </div>
+    <% else %>
+      <div class="text-center py-12 text-gray-400 text-sm">
+        This user hasn't posted anything yet.
+      </div>
+    <% end %>
   </div>
 </div>

@@ -1,0 +1,14 @@
+<%= form_with(model: @micropost, local: true) do |f| %>
+  <!-- Hiển thị bảng báo lỗi nếu gõ trống hoặc quá 140 ký tự -->
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="w-full mb-4 border border-gray-200 rounded-2xl bg-gray-50 focus-within:ring-2 focus-within:ring-blue-100 focus-within:border-blue-500 transition">
+    <div class="px-4 py-3 bg-white rounded-t-2xl">
+      <%= f.label :content, "What's on your mind?", class: "sr-only" %>
+      <%= f.text_area :content, placeholder: "Compose new micropost...",
+                      class: "w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-0 outline-none resize-none h-24" %>
+    </div>
+    <div class="flex items-center justify-end px-3 py-2 border-t border-gray-100">
+      <%= f.submit "Post", class: "inline-flex items-center py-2 px-4 text-xs font-semibold text-center text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition cursor-pointer" %>
+    </div>
+  </div>
+<% end %>
